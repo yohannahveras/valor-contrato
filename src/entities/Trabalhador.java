@@ -2,6 +2,7 @@ package entities;
 
 import entities.enums.NivelTrabalhador;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,11 +67,24 @@ public class Trabalhador {
         contratos.remove(contrato);
     }
 
-    public double valorPorMesAno(int ano, int mes) {
+    /*public double valorPorMesAno(int ano, int mes) {
         double soma = salario;
         for (Contrato c : contratos) {
             int c_ano = c.getData().getYear();
             int c_mes = c.getData().getMonthValue();
+            if (c_ano == ano && c_mes == mes) {
+                soma += c.valorTotal();
+            }
+        }
+        return soma;
+    }
+    */
+    public double valorPorMesAno(int ano, int mes) {
+        double soma = salario;
+        for (Contrato c : contratos) {
+            LocalDate data = c.getData();
+            int c_ano = data.getYear();
+            int c_mes = data.getMonthValue();
             if (c_ano == ano && c_mes == mes) {
                 soma += c.valorTotal();
             }
